@@ -1,6 +1,6 @@
 # Next.js Basics App
 
-This is a simple Next.js 13 application created to practice **App Router basics, routing, and navigation**.
+This is a simple Next.js application created to practice **App Router basics, routing, and navigation**.
 
 ## Challenge Overview
 
@@ -35,7 +35,7 @@ You should create:
 - **About Page (`/about`)**: Created a folder `about` with its own `page.js`:
 
   ```jsx
-  export default function About() {
+  export default function Page() {
     return (
       <main>
         <h1>About page</h1>
@@ -60,6 +60,9 @@ You should create:
              </li>
              <li>
                <Link href="/about">About</Link>
+             </li>
+             <li>
+               <Link href="/contact">Contact</Link>
              </li>
            </ul>
          </header>
