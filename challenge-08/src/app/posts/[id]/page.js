@@ -1,4 +1,4 @@
-import { posts } from "./data";
+import { posts } from "../data";
 
 export default async function PostPage({ params }) {
   const { id } = await params;
