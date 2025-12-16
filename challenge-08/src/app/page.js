@@ -1,3 +1,12 @@
+import Link from "next/link";
+
 export default function Home() {
-  return <h1>Home page</h1>;
+  return (
+    <main>
+      <h1>Home page</h1>
+      <Link href="./posts/" className="btn">
+        To Posts
+      </Link>
+    </main>
+  );
 }
