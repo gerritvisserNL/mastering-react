@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "mijn-eerste-post",
+    "title": "Mijn eerste post",
+    "excerpt": "Dit is mijn eerste blogpost",
+    "content": "Hallo wereld, dit is mijn eerste post."
+  },
+  {
+    "slug": "nextjs-oefenen",
+    "title": "Next.js oefenen",
+    "excerpt": "Waarom oefenen met Next.js leuk is",
+    "content": "Je leert routing, components en data."
+  }
+]
