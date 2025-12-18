@@ -5,12 +5,16 @@ export default function Home() {
   return (
     <main>
       <h1>Blog</h1>
-      <ul>
+      <hr />
+      <ul className="list">
         {posts.map((post) => (
           <li key={post.slug}>
             <h2>{post.title}</h2>
             <p>{post.excerpt}</p>
-            <Link href={`/posts/${post.slug}`}>Lees meer</Link>
+            <Link href={`/posts/${post.slug}`} className="read-more">
+              Lees meer
+            </Link>
+            <hr />
           </li>
         ))}
       </ul>

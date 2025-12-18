@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Server Component Example: Blog
 
-## Getting Started
+This is a simple Next.js application created to practice **server components, dynamic routing, and rendering data from a JSON file** in the App Router. The goal of this challenge was to understand how to display a list of blog posts, create dynamic post pages, and handle routing using slugs.
 
-First, run the development server:
+## Challenge Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The challenge required:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Importing a data array from a `posts.json` file
+- Creating a server component page (`page.js`) to display a list of blog posts
+- Creating dynamic routes for individual posts (`[slug]/page.js`)
+- Using `params` to fetch the correct post
+- Handling 404s with `notFound()`
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+app/
+├─ page.js
+├─ posts/
+│ └─ `[slug]`/
+│ └─ page.js
+components/
+├─ Header.js
+├─ Footer.js
+├─ Home.js
+data/
+└─ posts.json
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `app/page.js` is the main server component that renders the homepage and displays a list of posts.
+- `components/Home.js` is a child component that maps over posts and renders them with links to their detail pages.
+- `app/posts/[slug]/page.js` is a dynamic route that renders the detail page of a single post using the slug from `params`.
+- `data/posts.json` contains the array of blog post objects.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Key Next.js Concepts Practiced
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Using server components to render data
+- Dynamic routing with `[slug]` in the App Router. (slug is id)
+- Passing props from a server component to a child component
+- Mapping arrays to JSX elements with key props
+- Handling 404 pages with notFound()
+- Organizing project structure with components and data folders
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Possible Improvements
+
+- Add more fields to posts (date, author, images)
+- Style posts with CSS or Tailwind for better readability
+- Add a PostCard component for the homepage
+- Convert the post list to a client component for interactive features
+- Eventually implement a form or CMS integration to add posts dynamically
+
+---
+
+This challenge helped me understand dynamic routing, server components, and JSON data rendering in Next.js, forming a solid foundation for building blogs or other data-driven pages.

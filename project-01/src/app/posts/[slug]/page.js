@@ -1,12 +1,14 @@
 import posts from "@/data/posts.json";
 import { notFound } from "next/navigation";
 
-export default function PostPage({ params }) {
-  console.log(params);
-  return <h1>Test</h1>;
-  const post = posts.find((post) => post.slug === params.slug);
+export default async function PostPage({ params }) {
+  const { slug } = await params;
 
-  if (!post) return notFound();
+  const post = posts.find((post) => post.slug === slug);
+
+  if (!post) {
+    notFound();
+  }
 
   return (
     <main>
