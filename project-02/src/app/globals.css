@@ -17,7 +17,39 @@ body {
 .inner-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   min-height: 100dvh;
+}
+
+h1 {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.list {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.list__item {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid lightgray;
+  padding: 0.2rem;
+}
+
+.message {
+  margin: 1rem 0.2rem;
+}
+
+.removeBtn {
+  border-style: none;
+  background: red;
 }
