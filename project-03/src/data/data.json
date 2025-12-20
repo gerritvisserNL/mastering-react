@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "question": "Wat is de hoofdstad van Nederland?",
+    "options": ["Amsterdam", "Rotterdam", "Utrecht", "Den Haag"],
+    "correct": "Amsterdam"
+  },
+  {
+    "id": 2,
+    "question": "Wie schreef 'Romeo en Julia'?",
+    "options": [
+      "William Shakespeare",
+      "Charles Dickens",
+      "Leo Tolstoy",
+      "Mark Twain"
+    ],
+    "correct": "William Shakespeare"
+  },
+  {
+    "id": 3,
+    "question": "Wat is 8 × 7?",
+    "options": ["54", "56", "64", "48"],
+    "correct": "56"
+  },
+  {
+    "id": 4,
+    "question": "Welke planeet staat bekend als de Rode Planeet?",
+    "options": ["Venus", "Mars", "Jupiter", "Saturnus"],
+    "correct": "Mars"
+  },
+  {
+    "id": 5,
+    "question": "Welke taal wordt gesproken in Brazilië?",
+    "options": ["Spaans", "Portugees", "Frans", "Italiaans"],
+    "correct": "Portugees"
+  },
+  {
+    "id": 6,
+    "question": "Wat is de grootste oceaan op aarde?",
+    "options": [
+      "Atlantische Oceaan",
+      "Indische Oceaan",
+      "Stille Oceaan",
+      "Arctische Oceaan"
+    ],
+    "correct": "Stille Oceaan"
+  },
+  {
+    "id": 7,
+    "question": "Wie schilderde de Mona Lisa?",
+    "options": [
+      "Michelangelo",
+      "Leonardo da Vinci",
+      "Raphael",
+      "Vincent van Gogh"
+    ],
+    "correct": "Leonardo da Vinci"
+  },
+  {
+    "id": 8,
+    "question": "Wat is de hoofdstad van Japan?",
+    "options": ["Beijing", "Seoul", "Tokyo", "Bangkok"],
+    "correct": "Tokyo"
+  },
+  {
+    "id": 9,
+    "question": "Hoeveel continenten zijn er op aarde?",
+    "options": ["5", "6", "7", "8"],
+    "correct": "7"
+  },
+  {
+    "id": 10,
+    "question": "Wat is H2O beter bekend als?",
+    "options": ["Water", "Zuurstof", "Wijn", "Zout"],
+    "correct": "Water"
+  }
+]
