@@ -1,12 +1,38 @@
+"use client";
+import { useState } from "react";
 import data from "../data/data.json";
-import QuizContainer from "./components/QuizContainer";
+import QuestionCard from "./components/QuestionCard";
 
-export default function Home() {
-  console.log(data);
+export default function QuizPage() {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState([]);
+
+  const handleAnswer = (answer) => {
+    setAnswers([...answers, answer]);
+    setCurrentQuestion(currentQuestion + 1);
+  };
+
+  const score = answers.filter(
+    (answer, index) => answer === data[index].correct
+  ).length;
+
   return (
     <>
       <h1>Quiz-app</h1>
-      <QuizContainer />
+
+      {currentQuestion < data.length ? (
+        <QuestionCard
+          question={data[currentQuestion]}
+          onAnswer={handleAnswer}
+        />
+      ) : (
+        <div>
+          <h2>Quiz done!</h2>
+          <p>
+            Your scrore: {score} / {data.length}
+          </p>
+        </div>
+      )}
     </>
   );
 }
