@@ -29,8 +29,16 @@ export default function QuizPage() {
         <div>
           <h2>Quiz done!</h2>
           <p>
-            Your scrore: {score} / {data.length}
+            Your score: {score} / {data.length}
           </p>
+          <button
+            onClick={() => {
+              setCurrentQuestion(0);
+              setAnswers([]);
+            }}
+          >
+            Reset
+          </button>
         </div>
       )}
     </>
