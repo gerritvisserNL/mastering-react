@@ -1,4 +1,19 @@
 import "./globals.css";
+import { Orbitron, Montserrat } from "next/font/google";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-orbitron",
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-montserrat",
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -7,8 +22,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={`${orbitron.variable} ${montserrat.variable}`}>
+      <body>
+        <div className="container">
+          <div className="inner-container">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+        </div>
+      </body>
     </html>
   );
 }

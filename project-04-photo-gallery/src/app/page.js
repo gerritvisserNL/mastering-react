@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Home() {
   const [image, setImage] = useState(null);
@@ -10,7 +11,8 @@ export default function Home() {
       try {
         const res = await fetch("/api/nasa");
         const data = await res.json();
-        setImage(data);
+        setImage(data); // image is an object
+        console.log(data);
       } catch (err) {
         console.error(err);
       } finally {
@@ -24,7 +26,6 @@ export default function Home() {
   if (loading) {
     return (
       <main>
-        <h1>NASA Photo of the Day</h1>
         <p>Loading...</p>
       </main>
     );
@@ -33,21 +34,31 @@ export default function Home() {
   if (!image || image.media_type !== "image") {
     return (
       <main>
-        <h1>NASA Photo of the Day</h1>
-        <p>Geen afbeelding beschikbaar</p>
+        <p>No image available</p>
       </main>
     );
   }
 
   return (
     <main>
-      <h1>NASA Photo of the Day</h1>
-
-      <h2>{image.title}</h2>
-
-      <img src={image.url} alt={image.title} width="600" />
-
-      <p>{image.explanation}</p>
+      <Image
+        src={image.url}
+        alt={image.title}
+        width={750}
+        height={500}
+        sizes="100vw"
+        style={{ width: "100%", height: "auto" }}
+        priority
+      />
+      <h2 className="title">{image.title}</h2>
+      <p className="date">
+        {new Date(image.date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </p>
+      <p className="explanation">{image.explanation}</p>
     </main>
   );
 }
