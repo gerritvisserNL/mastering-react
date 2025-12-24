@@ -5,6 +5,7 @@ import Image from "next/image";
 export default function Home() {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -39,6 +40,11 @@ export default function Home() {
     );
   }
 
+  // set preview of text
+  const previewLength = 150;
+  const isLong = image.explanation.length > previewLength;
+  const preview = image.explanation.slice(0, previewLength) + "...";
+
   return (
     <main>
       <Image
@@ -58,7 +64,13 @@ export default function Home() {
           day: "numeric",
         })}
       </p>
-      <p className="explanation">{image.explanation}</p>
+      <p className="explanation">{expanded ? image.explanation : preview}</p>
+
+      {isLong && (
+        <button onClick={() => setExpanded(!expanded)}>
+          {expanded ? "Show less ▲" : "Read more ▼"}
+        </button>
+      )}
     </main>
   );
 }

@@ -28,7 +28,6 @@ export default function RootLayout({ children }) {
           <div className="inner-container">
             <Header />
             {children}
-            <Footer />
           </div>
         </div>
       </body>
