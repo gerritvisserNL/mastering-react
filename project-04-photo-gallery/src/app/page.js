@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import PhotoCard from "./components/PhotoCard";
 
 export default function Home() {
-  const [image, setImage] = useState(null);
+  const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
 
@@ -12,7 +13,10 @@ export default function Home() {
       try {
         const res = await fetch("/api/nasa");
         const data = await res.json();
-        setImage(data); // image is an object
+
+        const imagePhotos = data.filter((item) => item.media_type === "image");
+
+        setPhotos(imagePhotos); // photos is an array
       } catch (err) {
         console.error(err);
       } finally {
@@ -39,13 +43,15 @@ export default function Home() {
     );
   }
 
-  if (!image || image.media_type !== "image") {
+  if (!photos.length) {
     return (
       <main>
         <p>No image available</p>
       </main>
     );
   }
+
+  const image = photos[0];
 
   // set preview of text
   const previewLength = 150;
@@ -65,7 +71,7 @@ export default function Home() {
           style={{ width: "100%", height: "auto" }}
           priority
         />
-        <h3 className="hero__heading">{image.title}</h3>
+        <h3 className="hero__title">{image.title}</h3>
         <p className="hero__date">
           {new Date(image.date).toLocaleDateString("en-US", {
             year: "numeric",
@@ -73,20 +79,26 @@ export default function Home() {
             day: "numeric",
           })}
         </p>
-        <p className="hero__explanation">
-          {expanded ? image.explanation : preview}
-        </p>
+        <div className="hero__wrapper">
+          <p className="hero__explanation">
+            {expanded ? image.explanation : preview}
+          </p>
 
-        {isLong && (
-          <button
-            className="hero__toggle"
-            onClick={() => setExpanded(!expanded)}
-          >
-            {expanded ? "Show less ▲" : "Read more ▼"}
-          </button>
-        )}
+          {isLong && (
+            <button
+              className="hero__toggle"
+              onClick={() => setExpanded(!expanded)}
+            >
+              {expanded ? "Show less △" : "Read more ▽"}
+            </button>
+          )}
+        </div>
       </div>
-      <div className="grid"></div>
+      <div className="grid">
+        {photos.slice(1).map((photo) => (
+          <PhotoCard key={photo.date} photo={photo} />
+        ))}
+      </div>
     </main>
   );
 }

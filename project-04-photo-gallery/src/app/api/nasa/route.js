@@ -8,8 +8,14 @@ export async function GET() {
       });
     }
 
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(endDate.getDate() - 9);
+
     const response = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`
+      `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate
+        .toISOString()
+        .slice(0, 10)}&end_date=${endDate.toISOString().slice(0, 10)}`
     );
 
     if (!response.ok) {
@@ -18,7 +24,11 @@ export async function GET() {
 
     const data = await response.json();
 
-    return new Response(JSON.stringify(data), {
+    const imagesOnly = data
+      .filter((item) => item.media_type === "image") // alleen images geen videos
+      .reverse(); // nieuwste eerst
+
+    return new Response(JSON.stringify(imagesOnly), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

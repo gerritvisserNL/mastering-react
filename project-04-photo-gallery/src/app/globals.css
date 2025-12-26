@@ -92,6 +92,12 @@ h4 {
     #d1d1d1 45%,
     #b5b5b5 100%
   );
+  background: radial-gradient(
+    circle at 30% 30%,
+    oklch(0.957 0 0deg) 0%,
+    oklch(0.823 0 0deg) 45%,
+    oklch(0.705 0 0deg) 100%
+  );
   box-shadow: 0 0 14px rgba(180, 200, 255, 0.4),
     inset -2px -2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -122,39 +128,11 @@ h4 {
   }
 }
 
-/* .loader__text {
+.loader__text {
   text-align: center;
   opacity: 0.7;
   font-size: 0.9rem;
   margin-top: 1rem;
-} */
-
-.loader__text {
-  font-family: monospace;
-  font-size: 0.9rem;
-  color: #9bb8ff;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 2px solid #9bb8ff; /* cursor effect */
-  width: 21ch; /* aantal karakters van de tekst */
-  animation: typing 2.5s steps(24) 1 forwards, blink 0.75s step-end infinite;
-  margin-top: 1rem;
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 24ch;
-  }
-}
-
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
 }
 
 header {
@@ -196,7 +174,7 @@ main {
   cursor: pointer;
 }
 
-.hero__heading {
+.hero__title {
   font-size: 1rem;
   margin: 0.5rem 0;
   text-align: center;
@@ -204,6 +182,18 @@ main {
 
 .hero__date {
   font-size: 0.8rem;
+}
+
+.hero__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: 1px solid hsla(0 0% 100% / 0.1);
+  padding: 0 0.5rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
 }
 
 .hero__explanation {
@@ -227,4 +217,40 @@ main {
 .hero__toggle:focus-visible {
   outline: none;
   text-decoration: underline;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.photoCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid hsla(0 0% 100% / 0.1);
+}
+
+.photoCard img {
+  border-radius: 0.5rem;
+}
+
+.card__title {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+.card__date {
+  font-size: 0.8rem;
+}
+
+.card__explanation {
+  text-align: center;
 }
