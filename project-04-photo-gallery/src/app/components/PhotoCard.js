@@ -28,8 +28,8 @@ export default function PhotoCard({ photo }) {
 
       {expanded && <p className="card__explanation">{photo.explanation}</p>}
 
-      <button className="card__toggle" onClick={() => setExpanded(!expanded)}>
-        {expanded ? "Show less △" : "Read more ▽"}
+      <button className="toggle" onClick={() => setExpanded(!expanded)}>
+        {expanded ? "Show less" : "Read more"}
       </button>
     </article>
   );
