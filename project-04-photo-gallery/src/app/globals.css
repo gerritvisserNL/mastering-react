@@ -167,11 +167,37 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid hsla(0 0% 100% / 0.1);
+}
+
+.hero__image-wrapper {
+  position: relative;
 }
 
 .hero__image {
+  width: 100%;
+  height: auto;
   border-radius: 0.5rem;
   cursor: pointer;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.heart-icon {
+  width: 24px;
+  height: 24px;
+  color: red;
+  color: oklch(62% 0.24 25);
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.6));
 }
 
 .hero__title {
@@ -182,26 +208,15 @@ main {
 
 .hero__date {
   font-size: 0.8rem;
-}
-
-.hero__wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  border: 1px solid hsla(0 0% 100% / 0.1);
-  padding: 0 0.5rem;
-  margin: 1rem 0;
-  border-radius: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .hero__explanation {
-  margin: 1rem 0;
   text-align: center;
 }
 
-.hero__toggle {
+.toggle {
+  font-weight: 500;
   background: none;
   border: none;
   color: #7aa2ff;
@@ -209,12 +224,13 @@ main {
   cursor: pointer;
 }
 
-.hero__toggle:hover {
+.toggle:hover {
+  text-decoration: underline;
   color: #9bb8ff;
   color: oklch(0.82 0.14 255);
 }
 
-.hero__toggle:focus-visible {
+.toggle:focus-visible {
   outline: none;
   text-decoration: underline;
 }
@@ -249,6 +265,7 @@ main {
 
 .card__date {
   font-size: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .card__explanation {
