@@ -21,9 +21,7 @@ export default function Home() {
       } catch (err) {
         console.error(err);
       } finally {
-        setTimeout(() => {
-          setLoading(false);
-        }, 3000);
+        setLoading(false);
       }
     };
 
@@ -72,12 +70,12 @@ export default function Home() {
     let updatedFavorites;
 
     if (favorite) {
-      // verwijderen
+      // remove
       updatedFavorites = savedFavorites.filter(
         (item) => item.date !== image.date
       );
     } else {
-      // toevoegen
+      // add
       updatedFavorites = [...savedFavorites, image];
     }
 

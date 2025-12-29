@@ -154,6 +154,31 @@ header {
   line-height: 1.5rem;
 }
 
+.nav {
+  width: 100%;
+  margin: 1rem 0;
+  border-top: 1px solid hsla(0 0% 100% / 0.1);
+  border-bottom: 1px solid hsla(0 0% 100% / 0.1);
+}
+
+.nav ul {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav li {
+  color: #7aa2ff;
+  color: oklch(0.75 0.12 255);
+}
+
+.nav li:hover {
+  color: #9bb8ff;
+  color: oklch(0.82 0.14 255);
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -253,8 +278,15 @@ main {
   border-bottom: 1px solid hsla(0 0% 100% / 0.1);
 }
 
+.photoCard__image-wrapper {
+  position: relative;
+}
+
 .photoCard img {
+  width: 100%;
+  height: auto;
   border-radius: 0.5rem;
+  cursor: pointer;
 }
 
 .card__title {
