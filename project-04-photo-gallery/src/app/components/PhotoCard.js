@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function PhotoCard({ photo }) {
+export default function PhotoCard({ photo, onRemove }) {
   const [expanded, setExpanded] = useState(false);
   const [favorite, setFavorite] = useState(() => {
     const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -14,6 +14,14 @@ export default function PhotoCard({ photo }) {
 
   // toggle button to (un)set favorite images.
   const toggleFavorite = () => {
+    // ALS onRemove bestaat (dus we zijn op Favorites page)
+    if (favorite && onRemove) {
+      onRemove(photo.date);
+      setFavorite(false);
+      return;
+    }
+
+    // ANDERS: normale localStorage logica (Home page)
     const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
     let updatedFavorites;
 
