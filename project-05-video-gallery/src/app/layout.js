@@ -1,4 +1,6 @@
 import "./globals.css";
+import Header from "./component/Header";
+import Footer from "./component/Footer";
 
 export const metadata = {
   title: "Video gallery",
@@ -8,7 +10,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className="container">
+          <div className="inner-container">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+        </div>
+      </body>
     </html>
   );
 }
