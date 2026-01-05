@@ -1,44 +1,39 @@
-import Image from "next/image";
+// app/page.js
+"use client";
+import { useEffect, useState } from "react";
+import MovieCard from "./component/MovieCard";
 
-export default async function Home() {
-  // Populaire films ophalen via eigen API route
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const res = await fetch(`${baseUrl}/api/tmdb/`);
-  const movies = await res.json();
+// Populaire films ophalen via eigen API route
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-  // console.log(movies);
+export default function Home() {
+  const [movies, setMovies] = useState([]);
+  const [search, setSearch] = useState("");
 
-  const formatReleaseDate = (dateString) => {
-    if (!dateString) return "Unknown release date";
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const res = await fetch(`${baseUrl}/api/tmdb/`);
+      const data = await res.json();
+      setMovies(data);
+    };
 
-    const date = new Date(dateString);
+    fetchMovies();
+  }, []);
 
-    const year = date.getFullYear();
-    const month = new Intl.DateTimeFormat("en-US", { month: "short" }).format(
-      date
-    );
-    const day = String(date.getDate()).padStart(2, "0");
-
-    return `${year} ${month} ${day}`;
-  };
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <main className="main">
+      <input
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search movies..."
+      />
       <div className="grid">
-        {movies.map((movie) => (
-          <div key={movie.id} className="card">
-            <Image
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={movie.title}
-              width={500}
-              height={750}
-              className="movie__poster"
-            />
-            <h2 className="movie__title">{movie.title}</h2>
-            <p className="movie__release-date">
-              {formatReleaseDate(movie.release_date)}
-            </p>
-          </div>
+        {filteredMovies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
     </main>

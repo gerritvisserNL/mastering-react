@@ -1,7 +1,9 @@
 export default function Footer() {
   return (
     <footer>
-      <p>FOOTER</p>
+      <p>
+        &copy; {new Date().getFullYear()} Gerrit Visser. All Rights Reserverd.
+      </p>
     </footer>
   );
 }
