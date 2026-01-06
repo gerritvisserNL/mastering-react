@@ -19,7 +19,10 @@ export default function Home() {
       const res = await fetch(`${baseUrl}/api/tmdb/`);
       const data = await res.json();
       setMovies(data);
-      setLoading(false);
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     };
 
     fetchMovies();

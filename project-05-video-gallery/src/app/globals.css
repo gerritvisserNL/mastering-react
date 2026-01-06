@@ -237,14 +237,15 @@ input {
   max-width: 600px;
   width: 100%;
   overflow-y: auto;
-  /* border-radius: 1rem; */
+  border-radius: 1rem;
+  text-align: center;
   background: oklch(65% 0.12 220deg);
 }
 
 .modal-close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.5rem;
+  right: 0.5rem;
   border: none;
   color: oklch(99% 0 0);
   font-size: 1.5rem;
