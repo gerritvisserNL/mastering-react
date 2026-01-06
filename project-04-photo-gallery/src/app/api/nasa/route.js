@@ -8,31 +8,21 @@ export async function GET() {
       });
     }
 
-    // Huidige datum
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const day = String(now.getDate()).padStart(2, "0");
-
-    // Start van de maand en vandaag
-    const startDate = `${year}-${month}-01`;
-    const endDate = `${year}-${month}-${day}`;
-
-    // NASA APOD API request
     const response = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate}&end_date=${endDate}`
+      `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`
     );
 
     if (!response.ok) {
       throw new Error(`NASA API fout: ${response.status}`);
     }
 
-    const data = await response.json();
+    const rawData = await response.json();
 
-    // Alleen afbeeldingen, nieuwste eerst
-    const imagesOnly = data
-      .filter((item) => item.media_type === "image")
-      .reverse();
+    // Altijd werken met een array
+    const dataArray = Array.isArray(rawData) ? rawData : [rawData];
+
+    // Alleen afbeeldingen
+    const imagesOnly = dataArray.filter((item) => item.media_type === "image");
 
     return new Response(JSON.stringify(imagesOnly), {
       status: 200,
