@@ -2,6 +2,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import MovieCard from "./component/MovieCard";
+import SkeletonMovieCard from "./component/SkeletonMovieCard";
 
 // Populaire films ophalen via eigen API route
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
@@ -9,12 +10,14 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 export default function Home() {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(`${baseUrl}/api/tmdb/`);
       const data = await res.json();
       setMovies(data);
+      setLoading(false);
     };
 
     fetchMovies();
@@ -31,11 +34,26 @@ export default function Home() {
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search movies..."
       />
-      <div className="grid">
-        {filteredMovies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
-      </div>
+
+      {loading ? (
+        <div className="grid">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <SkeletonMovieCard key={i} />
+          ))}
+        </div>
+      ) : (
+        <>
+          {search && filteredMovies.length === 0 ? (
+            <p className="no-results">No movies found</p>
+          ) : (
+            <div className="grid">
+              {filteredMovies.map((movie) => (
+                <MovieCard key={movie.id} movie={movie} />
+              ))}
+            </div>
+          )}
+        </>
+      )}
     </main>
   );
 }
