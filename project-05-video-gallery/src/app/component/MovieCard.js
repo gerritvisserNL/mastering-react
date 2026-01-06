@@ -7,7 +7,7 @@
 import Image from "next/image";
 import useFavorites from "../hooks/useFavorites";
 
-export default function MovieCard({ movie }) {
+export default function MovieCard({ movie, onSelect }) {
   const { favorite, toggle } = useFavorites(movie.id);
 
   const formatReleaseDate = (dateString) => {
@@ -33,10 +33,14 @@ export default function MovieCard({ movie }) {
           width={500}
           height={750}
           className="movie__poster"
+          onClick={() => onSelect(movie)}
         />
         <button
           className={`favorite-button ${favorite ? "active" : ""}`}
-          onClick={() => toggle(movie)}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggle(movie);
+          }}
           aria-label="Toggle favorite"
         >
           <svg

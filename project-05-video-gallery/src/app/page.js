@@ -1,8 +1,9 @@
 // app/page.js
 "use client";
 import { useEffect, useState } from "react";
-import MovieCard from "./component/MovieCard";
 import SkeletonMovieCard from "./component/SkeletonMovieCard";
+import MovieCard from "./component/MovieCard";
+import MovieModal from "./component/MovieModal";
 
 // Populaire films ophalen via eigen API route
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
@@ -11,6 +12,7 @@ export default function Home() {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -34,7 +36,6 @@ export default function Home() {
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search movies..."
       />
-
       {loading ? (
         <div className="grid">
           {Array.from({ length: 6 }).map((_, i) => (
@@ -48,12 +49,21 @@ export default function Home() {
           ) : (
             <div className="grid">
               {filteredMovies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  onSelect={setSelectedMovie}
+                />
               ))}
             </div>
           )}
         </>
       )}
+      <MovieModal
+        movie={selectedMovie}
+        onClose={() => setSelectedMovie(null)}
+      />
+      ;
     </main>
   );
 }
