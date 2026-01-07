@@ -30,6 +30,7 @@ main {
   justify-content: center;
   align-items: center;
   width: 100%;
+  background-color: hsl(0, 0%, 90%);
 }
 
 .card__grid {
@@ -37,16 +38,36 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
   gap: 2rem;
   width: 100%;
 }
 
 .card {
   width: 100%;
-  height: auto;
   border-radius: 1rem;
-  background-color: red;
+  border: 1px solid hsl(0, 0%, 80%);
+  background-color: hsl(0, 0%, 98%);
+}
+
+.card__image-wrapper {
+  position: relative;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  width: 100%;
+  overflow: hidden;
 }
 
 .card__image {
+  object-fit: cover;
+  width: 100%;
+}
+
+.card__content {
+  padding: 0.5rem 1rem;
+}
+
+.card__heading {
+  font-size: 1rem;
+  text-align: center;
 }
