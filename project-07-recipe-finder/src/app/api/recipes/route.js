@@ -10,8 +10,6 @@ export async function GET(request) {
     );
   }
 
-  console.log("API Key:", apiKey);
-
   try {
     const response = await fetch(
       `https://api.spoonacular.com/recipes/random?number=12&apiKey=${apiKey}`,

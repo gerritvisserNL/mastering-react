@@ -1,4 +1,5 @@
 @import "./reset.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap");
 
 html {
   font-size: 16px;
@@ -6,6 +7,19 @@ html {
 
 body {
   font-family: "Inter", sans-serif;
+  font-weight: 400;
+  color: hsl(0, 0%, 20%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  color: hsl(0, 0%, 10%);
 }
 
 .container {
@@ -22,6 +36,27 @@ body {
   align-items: center;
   min-height: 100dvh;
   width: 360px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: grey;
+  width: 100%;
+  height: auto;
+}
+
+nav ul {
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+input {
+  margin: 1rem;
 }
 
 main {
@@ -48,6 +83,7 @@ main {
   border-radius: 1rem;
   border: 1px solid hsl(0, 0%, 80%);
   background-color: hsl(0, 0%, 98%);
+  transition: transform 0.3s ease;
 }
 
 .card__image-wrapper {
@@ -67,7 +103,72 @@ main {
   padding: 0.5rem 1rem;
 }
 
+.diet-icons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.vegetarian-icon,
+.vegan-icon,
+.glutenfree-icon,
+.dairyfree-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background-color: hsl(120, 73%, 75%);
+}
+
+.vegan-icon {
+  background-color: hsl(145, 62%, 50%);
+}
+
+.glutenfree-icon {
+  background-color: hsl(48, 90%, 50%);
+}
+
+.dairyfree-icon {
+  background-color: hsl(204, 100%, 60%);
+}
+
 .card__heading {
-  font-size: 1rem;
+  font-size: 1.2rem;
   text-align: center;
+  margin: 0.5rem 0 1rem;
+  line-height: 1.2rem;
+}
+
+.card__description {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.card__likes .star {
+  color: gold;
+  font-size: 1rem;
+}
+
+.card__button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.card__button {
+  border: none;
+  background: transparent;
+  color: hsl(24, 100%, 47%);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.card__button:hover {
+  color: hsl(24, 100%, 35%);
 }

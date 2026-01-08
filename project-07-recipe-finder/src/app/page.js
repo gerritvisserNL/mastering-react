@@ -10,16 +10,14 @@ export default function Home() {
       const res = await fetch("/api/recipes");
       const data = await res.json();
       setRecipes(data);
+      console.log(data);
     };
 
     fetchRecipes();
   }, []);
 
-  console.log(recipes[1]);
-
   return (
     <main>
-      <h2 className="main__heading">Recipes</h2>
       <div className="card__grid">
         {recipes.map((recipe) => (
           <CardRecipe key={recipe.id} recipe={recipe} />
