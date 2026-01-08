@@ -18,9 +18,10 @@ export default function Home() {
 
   return (
     <main>
+      <input placeholder="Search Recipe..."></input>
       <div className="card__grid">
-        {recipes.map((recipe) => (
-          <CardRecipe key={recipe.id} recipe={recipe} />
+        {recipes.map((recipe, index) => (
+          <CardRecipe key={recipe.id} recipe={recipe} priority={index === 0} />
         ))}
       </div>
     </main>

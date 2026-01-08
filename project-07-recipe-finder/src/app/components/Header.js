@@ -17,7 +17,6 @@ export default function Header() {
           </li>
         </ul>
       </nav>
-      <input></input>
     </header>
   );
 }
