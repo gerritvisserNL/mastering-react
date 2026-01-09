@@ -23,14 +23,6 @@ export default function Header() {
               Favorites
             </Link>
           </li>
-          <li>
-            <Link
-              href="/custom"
-              className={pathname === "/custom" ? "active-link" : ""}
-            >
-              Custom
-            </Link>
-          </li>
         </ul>
       </nav>
     </header>
