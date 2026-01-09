@@ -5,11 +5,20 @@ import useFavorites from "../hooks/useFavorites";
 export default function CardRecipe({ recipe, priority }) {
   const { favorite, toggle } = useFavorites(recipe.id);
 
-  function getShortDescription(recipe, length = 100) {
-    const summary = recipe?.summary ?? "";
-    const text = summary.replace(/<\/?[^>]+(>|$)/g, "");
-    return text.length > length ? text.slice(0, length) + "…" : text;
+  // function getShortDescription(recipe, length = 100) {
+  //   const summary = recipe?.summary ?? "";
+  //   const text = summary.replace(/<\/?[^>]+(>|$)/g, "");
+  //   return text.length > length ? text.slice(0, length) + "…" : text;
+  // }
+
+  function convertScore(recipe) {
+    const rawScore = recipe?.spoonacularScore;
+    if (rawScore == null) return null;
+
+    return Math.round((rawScore / 100) * 5 * 10) / 10;
   }
+
+  const score = convertScore(recipe);
 
   return (
     <div className="card">
@@ -35,7 +44,7 @@ export default function CardRecipe({ recipe, priority }) {
             viewBox="0 0 24 24"
             fill="currentColor"
             stroke="red"
-            strokeWidth="1"
+            strokeWidth="1.5"
             className="heart-icon"
           >
             <path
@@ -47,18 +56,22 @@ export default function CardRecipe({ recipe, priority }) {
         </button>
       </div>
       <div className="card__content">
-        <DietIcons recipe={recipe} />
-        <h3 className="card__heading">{recipe.title}</h3>
-        <p className="card__description">{getShortDescription(recipe)}</p>
-        <p className="card__cooking-time">⏱ {recipe.readyInMinutes} min</p>
-        <p className="card__servings">🍽 {recipe.servings} servings</p>
-        <p className="card__likes">
-          <span className="star">★</span> {recipe.aggregateLikes}
-        </p>
-        <div className="card__button-wrapper">
-          <button className="card__button">View Recipe</button>
+        <div className="card__times">
+          <p className="card__preparation">
+            🔪 {recipe.preparationMinutes ?? "-"}
+          </p>
+          <p className="card__cooking-time">
+            🔥 {recipe.cookingMinutes ?? "-"}
+          </p>
+          <p className="card__total-time">⏱️ {recipe.readyInMinutes} min</p>
         </div>
+        <div className="card__rating">
+          <span>⭐</span>
+          {score !== null && <span>{score}</span>}
+        </div>
+        <h3 className="card__heading">{recipe.title}</h3>
       </div>
+      {/* <DietIcons recipe={recipe} /> */}
     </div>
   );
 }
