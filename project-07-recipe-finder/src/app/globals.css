@@ -3,6 +3,7 @@
 
 html {
   font-size: 16px;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -43,20 +44,40 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
   background-color: grey;
   width: 100%;
-  height: auto;
+  height: 100px;
+}
+
+nav {
+  width: 100%;
 }
 
 nav ul {
   display: flex;
-  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
   padding: 0;
   list-style: none;
+  width: 100%;
+}
+
+nav a:hover {
+  color: hsl(0, 0%, 90%);
+}
+
+.active-link {
+  color: hsl(0, 0%, 90%);
 }
 
 input {
   margin: 1rem;
+  padding: 5px;
+  border-radius: 0.5rem;
+  border-style: none;
+  border: 1px solid hsl(0, 0%, 80%);
 }
 
 main {
@@ -84,6 +105,11 @@ main {
   border: 1px solid hsl(0, 0%, 80%);
   background-color: hsl(0, 0%, 98%);
   transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.03);
 }
 
 .card__image-wrapper {
@@ -191,4 +217,13 @@ main {
 
 .card__button:hover {
   color: hsl(24, 100%, 35%);
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: grey;
+  width: 100%;
+  height: auto;
 }

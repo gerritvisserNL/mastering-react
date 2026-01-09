@@ -1,7 +1,22 @@
+// app/favorites/page.js
+"use client";
+import useFavorites from "../hooks/useFavorites";
+import CardRecipe from "../components/CardRecipe";
+
 export default function Favorites() {
+  const { favorites } = useFavorites();
+
   return (
     <main>
-      <h2>Favorites page</h2>
+      <input placeholder="Search Recipe..."></input>
+      {!favorites.length && (
+        <p className="no-favorites">No favorite recipes yet</p>
+      )}
+      <div className="card__grid">
+        {favorites.map((favorite) => (
+          <CardRecipe key={favorite.id} recipe={favorite} />
+        ))}
+      </div>
     </main>
   );
 }

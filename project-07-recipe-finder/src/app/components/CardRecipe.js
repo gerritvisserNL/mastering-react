@@ -6,7 +6,8 @@ export default function CardRecipe({ recipe, priority }) {
   const { favorite, toggle } = useFavorites(recipe.id);
 
   function getShortDescription(recipe, length = 100) {
-    const text = recipe.summary.replace(/<\/?[^>]+(>|$)/g, "");
+    const summary = recipe?.summary ?? "";
+    const text = summary.replace(/<\/?[^>]+(>|$)/g, "");
     return text.length > length ? text.slice(0, length) + "…" : text;
   }
 
@@ -33,8 +34,8 @@ export default function CardRecipe({ recipe, priority }) {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            stroke="currentColor"
-            strokeWidth="1.5"
+            stroke="red"
+            strokeWidth="1"
             className="heart-icon"
           >
             <path
