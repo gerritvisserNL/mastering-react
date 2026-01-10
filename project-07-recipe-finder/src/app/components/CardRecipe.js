@@ -56,18 +56,16 @@ export default function CardRecipe({ recipe, priority }) {
         </button>
       </div>
       <div className="card__content">
-        <div className="card__times">
-          <p className="card__preparation">
-            🔪 {recipe.preparationMinutes ?? "-"}
+        <div className="card__meta-data">
+          <p className="card__preparation-time">
+            🔪{recipe.preparationMinutes ?? "-"}
           </p>
-          <p className="card__cooking-time">
-            🔥 {recipe.cookingMinutes ?? "-"}
-          </p>
-          <p className="card__total-time">⏱️ {recipe.readyInMinutes} min</p>
-        </div>
-        <div className="card__rating">
-          <span>⭐</span>
-          {score !== null && <span>{score}</span>}
+          <p className="card__total-time">⏱️{recipe.readyInMinutes}min</p>
+
+          <div className="card__rating">
+            <span>⭐</span>
+            {score !== null && <span>{score}</span>}
+          </div>
         </div>
         <h3 className="card__heading">{recipe.title}</h3>
       </div>
