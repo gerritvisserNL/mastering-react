@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import CardRecipe from "./components/CardRecipe";
+import RecipeSearchInput from "./components/RecipeSearchInput";
 
 export default function Home() {
   const [recipes, setRecipes] = useState([]);
@@ -18,7 +19,7 @@ export default function Home() {
 
   return (
     <main>
-      <input placeholder="Search Recipe..."></input>
+      <RecipeSearchInput />
       <div className="card__grid">
         {recipes.map((recipe, index) => (
           <CardRecipe key={recipe.id} recipe={recipe} priority={index === 0} />
