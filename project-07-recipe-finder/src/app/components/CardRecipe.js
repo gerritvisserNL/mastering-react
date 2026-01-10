@@ -5,12 +5,6 @@ import useFavorites from "../hooks/useFavorites";
 export default function CardRecipe({ recipe, priority }) {
   const { favorite, toggle } = useFavorites(recipe.id);
 
-  // function getShortDescription(recipe, length = 100) {
-  //   const summary = recipe?.summary ?? "";
-  //   const text = summary.replace(/<\/?[^>]+(>|$)/g, "");
-  //   return text.length > length ? text.slice(0, length) + "…" : text;
-  // }
-
   function convertScore(recipe) {
     const rawScore = recipe?.spoonacularScore;
     if (rawScore == null) return null;

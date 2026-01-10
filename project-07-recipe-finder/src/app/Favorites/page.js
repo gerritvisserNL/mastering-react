@@ -8,7 +8,6 @@ export default function Favorites() {
 
   return (
     <main>
-      <input placeholder="Search Recipe..."></input>
       {!favorites.length && (
         <p className="no-favorites">No favorite recipes yet</p>
       )}
