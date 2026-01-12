@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import CardRecipe from "./components/CardRecipe";
 import RecipeSearchInput from "./components/RecipeSearchInput";
+import CardRecipeSkeleton from "./components/CardRecipeSkeleton";
 
 export default function Home() {
   const [recipes, setRecipes] = useState([]);
@@ -22,7 +23,11 @@ export default function Home() {
   return (
     <main>
       {loading ? (
-        <p>Loading...</p>
+        <div className="card__grid">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <CardRecipeSkeleton key={i} />
+          ))}
+        </div>
       ) : (
         <>
           <RecipeSearchInput onResults={setRecipes} />
