@@ -11,7 +11,7 @@ export default function Favorites() {
       {!favorites.length && (
         <p className="no-favorites">No favorite recipes yet</p>
       )}
-      <div className="card__grid">
+      <div className="card__grid favorites">
         {favorites.map((favorite) => (
           <CardRecipe key={favorite.id} recipe={favorite} />
         ))}

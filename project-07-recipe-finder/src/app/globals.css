@@ -45,7 +45,7 @@ header {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  background-color: grey;
+  background-color: oklch(0.6 0 0);
   width: 100%;
   height: 100px;
 }
@@ -70,6 +70,24 @@ nav a:hover {
 
 .active-link {
   color: hsl(0, 0%, 90%);
+}
+
+.favorites-wrapper {
+  position: relative;
+}
+
+.favorites-counter {
+  position: absolute;
+  top: -0.25rem;
+  right: -1.1rem;
+  display: flex;
+  justify-content: center;
+  font-size: 0.6rem;
+  background-color: white;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  color: hsl(0, 0%, 10%);
 }
 
 .form {
@@ -169,6 +187,10 @@ main {
   width: 100%;
 }
 
+.card__grid.favorites {
+  margin-top: 1rem;
+}
+
 .card {
   width: 100%;
   border-radius: 1rem;
@@ -218,7 +240,7 @@ main {
 }
 
 .favorite-button.active {
-  color: red;
+  color: oklch(0.627 0.209 29.2);
 }
 
 .heart-icon {
@@ -291,7 +313,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: grey;
+  background-color: oklch(0.6 0 0);
   width: 100%;
   height: auto;
 }

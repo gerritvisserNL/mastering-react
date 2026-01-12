@@ -1,6 +1,7 @@
+// app/components/RecipeSearchInput
 import { useState } from "react";
 
-export default function RecipeSearchInput() {
+export default function RecipeSearchInput({ onResults }) {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     query: "",
@@ -14,9 +15,26 @@ export default function RecipeSearchInput() {
     setFilters((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(filters);
+
+    const params = new URLSearchParams(
+      Object.entries(filters).filter(([, value]) => value !== "")
+    );
+
+    try {
+      const response = await fetch(`/api/recipes?${params.toString()}`);
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch recipes");
+      }
+
+      const data = await response.json();
+
+      onResults(data);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (

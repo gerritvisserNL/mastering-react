@@ -1,9 +1,12 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import useFavorites from "../hooks/useFavorites";
 
 export default function Header() {
   const pathname = usePathname();
+
+  const { favorites } = useFavorites();
 
   return (
     <header>
@@ -16,12 +19,15 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link
-              href="/favorites"
-              className={pathname === "/favorites" ? "active-link" : ""}
-            >
-              Favorites
-            </Link>
+            <div className="favorites-wrapper">
+              <Link
+                href="/favorites"
+                className={pathname === "/favorites" ? "active-link" : ""}
+              >
+                Favorites
+                <span className="favorites-counter">{favorites.length}</span>
+              </Link>
+            </div>
           </li>
         </ul>
       </nav>
