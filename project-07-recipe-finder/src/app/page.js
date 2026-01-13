@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <main>
       {loading ? (
-        <div className="card__grid">
+        <div className="card__grid card__grid--skeleton">
           {Array.from({ length: 6 }).map((_, i) => (
             <CardRecipeSkeleton key={i} />
           ))}
