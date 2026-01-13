@@ -1,9 +1,10 @@
 import Image from "next/image";
-import DietIcons from "./DietIcons";
 import useFavorites from "../hooks/useFavorites";
 
-export default function CardRecipe({ recipe, priority }) {
+export default function CardRecipe({ recipe, onSelect, priority }) {
   const { favorite, toggle } = useFavorites(recipe.id);
+
+  console.log(recipe);
 
   function convertScore(recipe) {
     const rawScore = recipe?.spoonacularScore;
@@ -15,7 +16,7 @@ export default function CardRecipe({ recipe, priority }) {
   const score = convertScore(recipe);
 
   return (
-    <div className="card">
+    <div className="card" onClick={() => onSelect(recipe)}>
       <div className="card__image-wrapper">
         <Image
           src={recipe.image}
@@ -63,7 +64,6 @@ export default function CardRecipe({ recipe, priority }) {
         </div>
         <h3 className="card__heading">{recipe.title}</h3>
       </div>
-      {/* <DietIcons recipe={recipe} /> */}
     </div>
   );
 }

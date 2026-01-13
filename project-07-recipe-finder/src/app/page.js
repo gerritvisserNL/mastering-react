@@ -1,12 +1,15 @@
+// app/page.js
 "use client";
 import { useEffect, useState } from "react";
-import CardRecipe from "./components/CardRecipe";
-import RecipeSearchInput from "./components/RecipeSearchInput";
 import CardRecipeSkeleton from "./components/CardRecipeSkeleton";
+import CardRecipe from "./components/CardRecipe";
+import CardRecipeModal from "./components/CardRecipeModal";
+import RecipeSearchInput from "./components/RecipeSearchInput";
 
 export default function Home() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -38,11 +41,16 @@ export default function Home() {
                 key={recipe.id}
                 recipe={recipe}
                 priority={index === 0}
+                onSelect={setSelectedRecipe}
               />
             ))}
           </div>
         </>
       )}
+      <CardRecipeModal
+        recipe={selectedRecipe}
+        onClose={() => setSelectedRecipe(null)}
+      />
     </main>
   );
 }
