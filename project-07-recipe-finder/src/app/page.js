@@ -14,7 +14,7 @@ export default function Home() {
       const data = await res.json();
       setRecipes(data);
 
-      setTimeout(() => setLoading(false), 2000);
+      setTimeout(() => setLoading(false), 5000);
     };
 
     fetchRecipes();
