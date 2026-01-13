@@ -20,9 +20,7 @@ export default function Home() {
       const data = await res.json();
       setMovies(data);
 
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
+      setLoading(false);
     };
 
     fetchMovies();
@@ -66,7 +64,6 @@ export default function Home() {
         movie={selectedMovie}
         onClose={() => setSelectedMovie(null)}
       />
-      ;
     </main>
   );
 }
