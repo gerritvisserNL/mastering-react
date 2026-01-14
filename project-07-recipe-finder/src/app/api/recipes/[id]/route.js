@@ -1,3 +1,4 @@
+// app/api/recipes/[id]/route.js
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
@@ -9,6 +10,10 @@ export async function GET(request, { params }) {
       { error: "Spoonacular API key is missing" },
       { status: 500 }
     );
+  }
+
+  if (!id || parseInt(id, 10)) {
+    return NextResponse.json({ error: "Invalid recipe id" }, { status: 400 });
   }
 
   try {
@@ -26,16 +31,30 @@ export async function GET(request, { params }) {
 
     const data = await response.json();
 
+    const steps =
+      data.analyzedInstructions?.flatMap((i) => i.steps.map((s) => s.step)) ??
+      [];
+
+    const ingredients = data.extendedIngredients?.map((ing) => ({
+      id: ing.id,
+      name: ing.name,
+      amount: ing.amount,
+      unit: ing.unit,
+      original: ing.original,
+    }));
+
     return NextResponse.json({
-      id: data.id,
-      title: data.title,
-      image: data.image,
-      servings: data.servings,
-      readyInMinutes: data.readyInMinutes,
-      ingredients: data.extendedIngredients,
-      steps: data.analyzedInstructions?.[0]?.steps || [],
-      instructionsHtml: data.instructions || "",
-      sourceUrl: data.sourceUrl,
+      recipe: {
+        id: data.id,
+        title: data.title,
+        image: data.image,
+        servings: data.servings,
+        readyInMinutes: data.readyInMinutes,
+        ingredients,
+        steps,
+        instructionsHtml: data.instructions || "",
+        sourceUrl: data.sourceUrl,
+      },
     });
   } catch (error) {
     console.error("Fetch error:", error);

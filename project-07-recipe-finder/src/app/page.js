@@ -9,15 +9,16 @@ import RecipeSearchInput from "./components/RecipeSearchInput";
 export default function Home() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [selectedRecipeId, setSelectedRecipeId] = useState(null);
+
+  console.log("Render, selectedRecipeId: ", selectedRecipeId);
 
   useEffect(() => {
     const fetchRecipes = async () => {
       const res = await fetch("/api/recipes");
       const data = await res.json();
       setRecipes(data);
-
-      setTimeout(() => setLoading(false), 5000);
+      setLoading(false);
     };
 
     fetchRecipes();
@@ -41,16 +42,19 @@ export default function Home() {
                 key={recipe.id}
                 recipe={recipe}
                 priority={index === 0}
-                onSelect={setSelectedRecipe}
+                onSelect={() => setSelectedRecipeId(recipe.id)}
               />
             ))}
           </div>
         </>
       )}
-      <CardRecipeModal
-        recipe={selectedRecipe}
-        onClose={() => setSelectedRecipe(null)}
-      />
+
+      {selectedRecipeId && (
+        <CardRecipeModal
+          recipeId={selectedRecipeId}
+          onClose={() => setSelectedRecipeId(null)}
+        />
+      )}
     </main>
   );
 }

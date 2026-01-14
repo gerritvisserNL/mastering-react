@@ -1,11 +1,17 @@
+// app/components/CardRecipeModal.js
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import DietIcons from "./DietIcons";
 
-export default function CardRecipeModal({ recipe, onClose }) {
+export default function CardRecipeModal({ recipeId, onClose }) {
+  const [recipe, setRecipe] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  // Lock scroll when Modal is open
   useEffect(() => {
-    if (recipe) {
+    if (recipeId) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
     }
@@ -14,9 +20,34 @@ export default function CardRecipeModal({ recipe, onClose }) {
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
     };
-  }, [recipe]);
+  }, [recipeId]);
 
-  if (!recipe) return null;
+  useEffect(() => {
+    if (!recipeId) return;
+
+    const fetchRecipe = async () => {
+      try {
+        setLoading(true);
+        setError("");
+        setRecipe(null);
+
+        const res = await fetch(`/api/recipes/${recipeId}`);
+        const data = await res.json();
+
+        if (data.error) throw new Error(data.error);
+
+        setRecipe(data.recipe || data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecipe();
+  }, [recipeId]);
+
+  if (!recipeId || !recipe) return null;
 
   function convertScore(recipe) {
     const rawScore = recipe?.spoonacularScore;
@@ -33,6 +64,7 @@ export default function CardRecipeModal({ recipe, onClose }) {
         <button className="modal-close" onClick={onClose}>
           X
         </button>
+
         <Image
           className="modal__image"
           src={recipe.image}
@@ -40,6 +72,7 @@ export default function CardRecipeModal({ recipe, onClose }) {
           width={278}
           height={185}
         />
+
         <div className="modal__content">
           <div className="modal__meta-data">
             <DietIcons recipe={recipe} />
@@ -54,7 +87,6 @@ export default function CardRecipeModal({ recipe, onClose }) {
           🔪{recipe.preparationMinutes ?? "-"}
         </p>
         <p className="card__total-time">⏱️{recipe.readyInMinutes}min</p>
-        <p>Ingredients: {recipe.ingredients}</p>
       </div>
     </div>
   );
