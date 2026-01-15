@@ -47,7 +47,7 @@ export default function CardRecipeModal({ recipeId, onClose }) {
     fetchRecipe();
   }, [recipeId]);
 
-  if (!recipeId || !recipe) return null;
+  if (!recipeId) return null;
 
   function convertScore(recipe) {
     const rawScore = recipe?.spoonacularScore;
@@ -56,7 +56,7 @@ export default function CardRecipeModal({ recipeId, onClose }) {
     return Math.round((rawScore / 100) * 5 * 10) / 10;
   }
 
-  const score = convertScore(recipe);
+  const score = recipe ? convertScore(recipe) : null;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -65,28 +65,36 @@ export default function CardRecipeModal({ recipeId, onClose }) {
           X
         </button>
 
-        <Image
-          className="modal__image"
-          src={recipe.image}
-          alt={recipe.title}
-          width={278}
-          height={185}
-        />
+        {loading && <p>Recept laden...</p>}
 
-        <div className="modal__content">
-          <div className="modal__meta-data">
-            <DietIcons recipe={recipe} />
-            <div className="modal__rating">
-              <span>⭐</span>
-              {score !== null && <span>{score}</span>}
+        {error && <p>{error}</p>}
+
+        {!loading && !error && recipe && (
+          <>
+            <Image
+              className="modal__image"
+              src={recipe.image}
+              alt={recipe.title}
+              width={278}
+              height={185}
+            />
+
+            <div className="modal__content">
+              <div className="modal__meta-data">
+                <DietIcons recipe={recipe} />
+                <div className="modal__rating">
+                  <span>⭐</span>
+                  {score !== null && <span>{score}</span>}
+                </div>
+              </div>
+              <h2 className="modal__heading">{recipe.title}</h2>
             </div>
-          </div>
-          <h2 className="modal__heading">{recipe.title}</h2>
-        </div>
-        <p className="card__preparation-time">
-          🔪{recipe.preparationMinutes ?? "-"}
-        </p>
-        <p className="card__total-time">⏱️{recipe.readyInMinutes}min</p>
+            <p className="card__preparation-time">
+              🔪{recipe.preparationMinutes ?? "-"}
+            </p>
+            <p className="card__total-time">⏱️{recipe.readyInMinutes}min</p>
+          </>
+        )}
       </div>
     </div>
   );

@@ -2,8 +2,10 @@
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
+  const { id } = await params;
+  const recipeId = Number(id);
+
   const apiKey = process.env.SPOONACULAR_API_KEY;
-  const { id } = params;
 
   if (!apiKey) {
     return NextResponse.json(
@@ -12,13 +14,13 @@ export async function GET(request, { params }) {
     );
   }
 
-  if (!id || parseInt(id, 10)) {
+  if (!Number.isInteger(recipeId) || recipeId <= 0) {
     return NextResponse.json({ error: "Invalid recipe id" }, { status: 400 });
   }
 
   try {
     const response = await fetch(
-      `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${apiKey}`,
+      `https://api.spoonacular.com/recipes/${recipeId}/information?includeNutrition=false&apiKey=${apiKey}`,
       { next: { revalidate: 300 } }
     );
 
