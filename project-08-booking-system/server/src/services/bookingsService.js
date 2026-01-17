@@ -1,67 +1,54 @@
-//server/src/services/bookingsService.js
-import crypto from "crypto";
+// server/src/services/bookingsService.js
+import { PrismaClient } from "../../generated/prisma"; // pad naar jouw gegenereerde Prisma client
 
-// tijdelijke opslag in geheugen
-const bookings = [];
+const prisma = new PrismaClient();
 
-// Hulpfunctie: check overlap
-const isOverlapping = (newBooking) => {
-  const newStart = new Date(newBooking.startDate);
-  const newEnd = new Date(newBooking.endDate);
-
-  return bookings.some((booking) => {
-    const start = new Date(booking.startDate);
-    const end = new Date(booking.endDate);
-
-    // Overlap als nieuwe start binnen bestaande valt
-    // of nieuwe eind binnen bestaande valt
-    // of nieuwe volledig omvat bestaande
-    return (
-      (newStart >= start && newStart <= end) ||
-      (newEnd >= start && newEnd <= end) ||
-      (newStart <= start && newEnd >= end)
-    );
+// Haal alle bookings op
+const getAllBookings = async () => {
+  return await prisma.booking.findMany({
+    orderBy: { startDate: "asc" }, // optioneel: sorteer op datum
   });
 };
 
-const getAllBookings = () => {
-  return bookings;
-};
-
-const createBooking = (bookingData) => {
-  const { startDate, endDate, name } = bookingData;
-
-  // minimale validatie
-  if (!startDate || !endDate || !name) {
+// Maak een nieuwe booking aan
+const createBooking = async ({ name, startDate, endDate }) => {
+  if (!name || !startDate || !endDate) {
     throw new Error("Missing required fields");
   }
 
-  const newBooking = {
-    id: crypto.randomUUID(),
-    startDate,
-    endDate,
-    name,
-  };
+  // Converteer naar Date objecten
+  const start = new Date(startDate);
+  const end = new Date(endDate);
 
-  // overlap-check
-  if (isOverlapping(newBooking)) {
+  // Overlap check: zoek bestaande bookings die overlappen
+  const overlapping = await prisma.booking.findFirst({
+    where: {
+      OR: [
+        {
+          startDate: { lte: end },
+          endDate: { gte: start },
+        },
+      ],
+    },
+  });
+
+  if (overlapping) {
     throw new Error("Booking overlaps with existing booking");
   }
 
-  bookings.push(newBooking);
-  return newBooking;
-};
+  // Nieuwe booking aanmaken
+  const newBooking = await prisma.booking.create({
+    data: {
+      name,
+      startDate: start,
+      endDate: end,
+    },
+  });
 
-const deleteBooking = (id) => {
-  const index = bookings.findIndex((b) => b.id === id);
-  if (index === -1) {
-    throw new Error("Booking not found");
-  }
-  bookings.splice(index, 1);
+  return newBooking;
 };
 
 export default {
   getAllBookings,
   createBooking,
-  deleteBooking,
 };
