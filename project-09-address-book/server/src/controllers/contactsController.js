@@ -14,17 +14,18 @@ export const getAllContacts = async (req, res) => {
 
 // POST /contacts
 export const createContact = async (req, res) => {
-  const { name, email, phone } = req.body;
+  const { firstName, lastName, email, phone } = req.body;
 
-  if (!name || !email) {
+  if (!firstName || !lastName || !email || !phone) {
     return res.status(400).json({
-      error: "Name and email are required",
+      error: "All fields are required",
     });
   }
 
   try {
     const contact = await contactsService.createContact({
-      name,
+      firstName,
+      lastName,
       email,
       phone,
     });
@@ -40,13 +41,13 @@ export const createContact = async (req, res) => {
 // PUT /contacts/:id
 export const updateContact = async (req, res) => {
   const id = Number(req.params.id);
-  const { name, email, phone } = req.body;
+  const { firstName, lastName, email, phone } = req.body;
 
   if (Number.isNaN(id)) {
     return res.status(400).json({ error: "Invalid ID" });
   }
 
-  if (!name && !email && !phone) {
+  if (!firstName && !lastName && !email && !phone) {
     return res
       .status(400)
       .json({ error: "At least one field is required to update" });
@@ -54,7 +55,8 @@ export const updateContact = async (req, res) => {
 
   try {
     const contact = await contactsService.updateContact(id, {
-      name,
+      firstName,
+      lastName,
       email,
       phone,
     });

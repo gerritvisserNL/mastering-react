@@ -6,15 +6,16 @@ const prisma = new PrismaClient();
 // Fetch all contacts
 export const getAllContacts = async () => {
   return prisma.contact.findMany({
-    orderBy: { name: "asc" },
+    orderBy: { lastName: "asc" },
   });
 };
 
 // Create a new contact
-export const createContact = async ({ name, email, phone }) => {
+export const createContact = async ({ firstName, lastName, email, phone }) => {
   return prisma.contact.create({
     data: {
-      name,
+      firstName,
+      lastName,
       email,
       phone,
     },
@@ -25,7 +26,7 @@ export const createContact = async ({ name, email, phone }) => {
 export const updateContact = async (id, data) => {
   return prisma.contact.update({
     where: { id },
-    data, // data can contain { name, email, phone }
+    data, // data can contain { firstName, lastName, email, phone }
   });
 };
 
