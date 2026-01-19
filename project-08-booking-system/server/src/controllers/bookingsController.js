@@ -15,18 +15,8 @@ const createBooking = (req, res) => {
     const newBooking = bookingsService.createBooking(req.body);
     res.status(201).json(newBooking);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ message: err.message });
   }
 };
 
-const deleteBooking = (req, res) => {
-  try {
-    const { id } = req.params;
-    bookingsService.deleteBooking(id);
-    res.status(200).json({ message: "Booking deleted" });
-  } catch (err) {
-    res.status(404).json({ error: err.message });
-  }
-};
-
-export default { getAllBookings, createBooking, deleteBooking };
+export default { getAllBookings, createBooking };

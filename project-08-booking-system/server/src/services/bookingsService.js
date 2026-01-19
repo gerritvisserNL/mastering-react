@@ -52,16 +52,7 @@ const createBooking = (bookingData) => {
   return newBooking;
 };
 
-const deleteBooking = (id) => {
-  const index = bookings.findIndex((b) => b.id === id);
-  if (index === -1) {
-    throw new Error("Booking not found");
-  }
-  bookings.splice(index, 1);
-};
-
 export default {
   getAllBookings,
   createBooking,
-  deleteBooking,
 };
