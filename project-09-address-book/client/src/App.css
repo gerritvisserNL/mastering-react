@@ -12,3 +12,117 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 400;
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: oklch(98% 0 0);
+}
+
+.inner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100dvh;
+  min-width: 360px;
+  background-color: oklch(98% 0 0);
+}
+
+header {
+  margin: 1rem 0;
+  width: 100%;
+  text-align: center;
+}
+
+main {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: space-between;
+  gap: 1rem;
+  height: 18.5rem;
+  margin: 0 0 2rem;
+  padding: 1rem;
+  border: 1px solid gray;
+  border-radius: 0.2rem;
+}
+
+.field-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.addBtn {
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  border-style: none;
+  background-color: oklch(0.6 0.1 250);
+  cursor: pointer;
+}
+
+.addBtn:hover {
+  background-color: darkblue;
+  background-color: oklch(0.55 0.12 250);
+}
+
+.cancelBtn {
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  border: 1px solid gray;
+}
+
+.cancelBtn:hover {
+  background-color: lightgray;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+  border: 1px solid gray;
+}
+
+.actionBtn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-left: 0.5rem;
+}
+
+.editBtn,
+.deleteBtn {
+  background: transparent;
+  border-style: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.edit-icon {
+  color: oklch(0.62 0.02 260);
+}
+
+.edit-icon:hover {
+  color: oklch(0.52 0.02 260);
+}
+
+.delete-icon {
+  color: red;
+}
+
+.delete-icon:hover {
+  color: darkred;
+}
